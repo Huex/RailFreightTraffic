@@ -1,0 +1,97 @@
+﻿<Window x:Class="RailFreightTraffic.Views.ConnectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:RailFreightTraffic.Converters.ConnectWindow"
+        xmlns:local="clr-namespace:RailFreightTraffic.Views"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Light"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+        mc:Ignorable="d"
+        Title="Connection" Height="300" Width="300" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/RailFreightTraffic;component/Resourses/Train.ico">
+    <Window.Resources>
+        <converters:ConnectButtonConverter x:Key="ConnectButtonConverter" />
+        <converters:ConnectProgressBarConverter x:Key="ConnectProgressBarConverter"/>
+        <converters:ConnectFieldsConverter x:Key="ConnectFieldsConverter"/>
+        <converters:ConnectPromptConverter x:Key="ConnectPromptConverter"/>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 10">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="170"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Name="Prompt" 
+                       TextAlignment="Center"
+                       Foreground="Red"
+                       TextWrapping="Wrap"
+                       Text="{Binding ConnectionStatus, Converter={StaticResource ConnectPromptConverter}}"/>
+        </StackPanel>
+        
+        <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" 
+                                 Kind="Account" 
+                                 VerticalAlignment="Center" 
+                                 Height="25" 
+                                 Margin="0,15,0,0" 
+                                 Width="20" />
+
+        <TextBox Grid.Row="1" Grid.Column="1" 
+                 materialDesign:HintAssist.Hint="Login" 
+                 Margin="5 0 0 0"
+                 Name="FloatingAccountBox"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                 Text="{Binding User.Account}"
+                 IsEnabled="{Binding ConnectionStatus,Converter={StaticResource ConnectFieldsConverter}}"/>
+
+        <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" 
+                                 Kind="Key"
+                                 VerticalAlignment="Center" 
+                                 Height="25" 
+                                 Margin="0,15,0,0" 
+                                 Width="20"/>
+
+        <PasswordBox Grid.Row="2" Grid.Column="1" 		
+                     Name="FloatingPasswordBox"
+                     Margin="5 5 0 0"
+                     materialDesign:HintAssist.Hint="Password"
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                     IsEnabled="{Binding ConnectionStatus,Converter={StaticResource ConnectFieldsConverter}}"
+                     PasswordChanged="FloatingPasswordChanged"/>
+
+        <Button Grid.Row="3" Grid.Column="1"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Margin="0 15 0 5"
+                Width="100" 
+                Name="ConnectionButton"
+                Content="Connect"
+                Visibility="{Binding ConnectionStatus, Converter={StaticResource ConnectButtonConverter}}"
+                Command="{Binding ConnectCommand}"/>
+
+        <ProgressBar Grid.Row="3" Grid.Column="1"
+                     Style="{StaticResource MaterialDesignCircularProgressBar}"          
+                     Value="0"
+                     IsIndeterminate="True"
+                     Name="ProgressBar"
+                     VerticalAlignment="Center" 
+                     HorizontalAlignment="Center"
+                     Margin="12 12 12 12"
+                     Visibility="{Binding ConnectionStatus, Converter={StaticResource ConnectProgressBarConverter}}"/>
+            
+    </Grid>
+</Window>
