@@ -13,16 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RailFreightTraffic.Views
+namespace RailFreightTraffic.Dialogs
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RouteDialog.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RouteDialog : UserControl
     {
-        public MainWindow()
+        public RouteDialog()
         {
             InitializeComponent();
+        }
+
+        private void SaveClick(object sender, RoutedEventArgs e)
+        {
+            ((RouteDialogViewModel)DataContext).Edit();
+        }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            ((RouteDialogViewModel)DataContext).Delete();
         }
     }
 }

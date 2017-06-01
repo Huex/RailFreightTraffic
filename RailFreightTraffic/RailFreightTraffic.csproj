@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=5.9.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.5.9.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -65,11 +69,76 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\ConnectWindow.xaml">
+    <Compile Include="Commands\AnotherCommandImplementation.cs" />
+    <Compile Include="Converters\DialogIsReadOnlyConverter.cs" />
+    <Compile Include="Dialogs\CargoDialog.xaml.cs">
+      <DependentUpon>CargoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\CargoDialogViewModel.cs" />
+    <Compile Include="Dialogs\ContentDialog.xaml.cs">
+      <DependentUpon>ContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ContentDialogViewModel.cs" />
+    <Compile Include="Dialogs\RouteDialog.xaml.cs">
+      <DependentUpon>RouteDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RouteDialogViewModel.cs" />
+    <Compile Include="Dialogs\StationDialog.xaml.cs">
+      <DependentUpon>StationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\StationDialogViewModel.cs" />
+    <Compile Include="Dialogs\TypeDialogs.cs" />
+    <Compile Include="Dialogs\UserDialog.xaml.cs">
+      <DependentUpon>UserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\FbCommandArgs.cs" />
+    <Compile Include="Models\FbCommandParameterArgs.cs" />
+    <Compile Include="Models\ItemPage.cs" />
+    <Compile Include="Models\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="ViewModels\Database\CargoData.cs" />
+    <Compile Include="ViewModels\Database\ClientData.cs" />
+    <Compile Include="ViewModels\Database\ContentsData.cs" />
+    <Compile Include="ViewModels\Database\RouteData.cs" />
+    <Compile Include="ViewModels\Database\StationData.cs" />
+    <Compile Include="ViewModels\Database\UserData.cs.cs" />
+    <Compile Include="Dialogs\ClientDialogViewModel.cs" />
+    <Compile Include="Dialogs\DialogModes.cs" />
+    <Compile Include="Dialogs\UserDialogViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Page Include="Dialogs\CargoDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainWindow.xaml">
+    <Page Include="Dialogs\ClientDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\ContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RouteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\StationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\UserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ConnectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -83,27 +152,28 @@
     <Compile Include="Converters\ConnectWindow\ConnectProgressBarConverter.cs.cs" />
     <Compile Include="Converters\ConnectWindow\ConnectFieldsConverter.cs" />
     <Compile Include="Converters\ConnectWindow\ConnectPromptConverter.cs" />
-    <Compile Include="Models\App\Client.cs" />
-    <Compile Include="Models\App\ConnectionState.cs" />
-    <Compile Include="Models\App\ConnectionStatus.cs" />
-    <Compile Include="Models\App\Credentials.cs" />
+    <Compile Include="Models\FbClient.cs" />
+    <Compile Include="Models\ConnectionState.cs" />
+    <Compile Include="Models\ConnectionStatus.cs" />
+    <Compile Include="Models\Credentials.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\ConnectViewModel.cs" />
-    <Compile Include="Views\ConnectWindow.xaml.cs">
+    <Compile Include="ViewModels\PageViewModel.cs" />
+    <Compile Include="Dialogs\ClientDialog.xaml.cs">
+      <DependentUpon>ClientDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\PageView.xaml.cs">
+      <DependentUpon>PageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ConnectWindow.xaml.cs">
       <DependentUpon>ConnectWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Database\Cargo.cs" />
-    <Compile Include="Models\Database\Client.cs" />
-    <Compile Include="Models\Database\ClientType.cs" />
-    <Compile Include="Models\Database\Route.cs" />
-    <Compile Include="Models\Database\RouteSegment.cs" />
-    <Compile Include="Models\Database\Station.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

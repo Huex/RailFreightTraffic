@@ -50,7 +50,7 @@
                                  Width="20" />
 
         <TextBox Grid.Row="1" Grid.Column="1" 
-                 materialDesign:HintAssist.Hint="Login" 
+                 materialDesign:HintAssist.Hint="Логин" 
                  Margin="5 0 0 0"
                  Name="FloatingAccountBox"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
@@ -67,7 +67,7 @@
         <PasswordBox Grid.Row="2" Grid.Column="1" 		
                      Name="FloatingPasswordBox"
                      Margin="5 5 0 0"
-                     materialDesign:HintAssist.Hint="Password"
+                     materialDesign:HintAssist.Hint="Пароль"
                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                      IsEnabled="{Binding ConnectionStatus,Converter={StaticResource ConnectFieldsConverter}}"
                      PasswordChanged="FloatingPasswordChanged"/>
@@ -79,7 +79,7 @@
                 Margin="0 15 0 5"
                 Width="100" 
                 Name="ConnectionButton"
-                Content="Connect"
+                Content="Вход"
                 Visibility="{Binding ConnectionStatus, Converter={StaticResource ConnectButtonConverter}}"
                 Command="{Binding ConnectCommand}"/>
 

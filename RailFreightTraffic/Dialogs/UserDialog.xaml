@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="RailFreightTraffic.Dialogs.UserDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RailFreightTraffic.Dialogs"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:domain="clr-namespace:RailFreightTraffic.Models.App"
+             xmlns:converters="clr-namespace:RailFreightTraffic.Converters"
+             xmlns:i="Microsoft.Expression.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="410" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:DialogIsReadOnlyConverter x:Key="DialogIsReadOnlyConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+            <RowDefinition MaxHeight="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBox wpf:HintAssist.Hint="Логин" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 8 0 0"
+                 Text="{Binding Логин}"
+                 FontSize="16" Grid.Row="0"
+                 IsReadOnly="{Binding IsReadOnly}"/>
+        <TextBox wpf:HintAssist.Hint="Пароль" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                 Margin="0 8 0 0"
+                 FontSize="16" Grid.Row="1"
+                 Text="{Binding Пароль}"
+                 IsReadOnly="{Binding IsReadOnly}"/>
+        <TextBlock Grid.Row="2"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменение клиентов"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                          Grid.Row="2"
+                      IsChecked="{Binding Клиенты}"/>
+        <TextBlock Grid.Row="3"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменение маршрутов"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                           Grid.Row="3"
+                      IsChecked="{Binding Маршруты}"/>
+        <TextBlock Grid.Row="4"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменения грузов"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                           Grid.Row="4"
+                      IsChecked="{Binding Грузы}"/>
+        <TextBlock Grid.Row="5"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменение товаров"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                           Grid.Row="5"
+                      IsChecked="{Binding Товары}"/>
+        <TextBlock Grid.Row="6"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменение станций"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                       Grid.Row="6"
+                      IsChecked="{Binding Станции}"/>
+        <TextBlock Grid.Row="7"
+                   Margin="8 0 8 0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Text="Изменение пользователей"
+                   FontSize="14"/>
+        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}" VerticalAlignment="Center"
+                          ToolTip="Default ToggleButton Style"
+                          Margin="0 8 32 0"
+                          HorizontalAlignment="Right"
+                       Grid.Row="7"
+                      IsChecked="{Binding ChUsers}"/>
+
+
+        <DockPanel Grid.Row="9"
+                    Margin="0 16 0 0">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource DialogIsReadOnlyConverter}}"
+                    Content="Сохранить"
+                    Click="SaveClick" Margin="0,2,0,3"/>
+
+            <Button IsCancel="True" Margin="0,2,0,3" Style="{DynamicResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding CanDelete}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    Content="Удалить"
+                    Click="DeleteClick" Width="89"/>
+
+            <Button IsCancel="True" Margin="0,2,0,3" Style="{DynamicResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Right"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    Content="Отмена"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

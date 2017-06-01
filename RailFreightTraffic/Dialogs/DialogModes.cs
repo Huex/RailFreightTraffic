@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RailFreightTraffic.Models.Database
+namespace RailFreightTraffic.ViewModels.Dialogs
 {
-    enum ClientType
+    public enum DialogModes
     {
-        Сonsigner,
-        Consignee,
-        Payer
+        Edit,
+        New
     }
 }

@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="RailFreightTraffic.Dialogs.StationDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RailFreightTraffic.Dialogs"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:domain="clr-namespace:RailFreightTraffic.Models.App"
+             xmlns:converters="clr-namespace:RailFreightTraffic.Converters"
+             xmlns:i="Microsoft.Expression.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:DialogIsReadOnlyConverter x:Key="DialogIsReadOnlyConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition MaxHeight="50"/>
+        </Grid.RowDefinitions>
+
+        <TextBox wpf:HintAssist.Hint="Наименование" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"                 
+                 Margin="0 6 0 0"
+                 Text="{Binding Наименование}"
+                 FontSize="18" Grid.Row="0"
+                 IsReadOnly="{Binding IsReadOnly}"/>
+
+        <DockPanel Grid.Row="4"
+                    Margin="0 16 0 0">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource DialogIsReadOnlyConverter}}"
+                    Content="Сохранить"
+                    Click="SaveClick" Margin="0,2,0,3"/>
+
+            <Button IsCancel="True" Margin="0,2,0,3" Style="{DynamicResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding CanDelete}"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    Content="Удалить"
+                    Click="DeleteClick" Width="89"/>
+
+            <Button IsCancel="True" Margin="0,2,0,3" Style="{DynamicResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Right"
+                    Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                    Content="Отмена"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

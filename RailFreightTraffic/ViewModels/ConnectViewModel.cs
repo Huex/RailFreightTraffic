@@ -14,7 +14,7 @@ namespace RailFreightTraffic.ViewModels
     {
         public Credentials User { get; set; }
         public string Prompt { get; private set; }
-        private Client _client;
+        private UserClient _client;
 
         private ICommand _connectCommand;
 
@@ -38,7 +38,7 @@ namespace RailFreightTraffic.ViewModels
             }
         }
 
-        public ConnectViewModel(Client client)
+        public ConnectViewModel(UserClient client)
         {
             _client = client;
             User = new Credentials();

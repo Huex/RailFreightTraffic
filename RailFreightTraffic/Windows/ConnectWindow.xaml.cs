@@ -1,4 +1,5 @@
-﻿using RailFreightTraffic.ViewModels;
+﻿using RailFreightTraffic.Models.App;
+using RailFreightTraffic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,10 @@ namespace RailFreightTraffic.Views
     /// </summary>
     public partial class ConnectWindow : Window
     {
-        public ConnectWindow()
+        public ConnectWindow(UserClient userClient)
         {
             InitializeComponent();
+            DataContext = new ConnectViewModel(userClient);
         }
 
         private void FloatingPasswordChanged(object sender, RoutedEventArgs e)

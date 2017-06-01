@@ -1,4 +1,5 @@
 ﻿using RailFreightTraffic.Models.App;
+using RailFreightTraffic.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,15 +15,15 @@ namespace RailFreightTraffic
     /// </summary>
     public partial class App : Application
     {
+        UserClient _userClient;
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            Client BDClient = new Client();
-            Views.ConnectWindow connectWindow = new Views.ConnectWindow();
-            connectWindow.DataContext = new ViewModels.ConnectViewModel(BDClient);
+            _userClient = new UserClient();
+           ConnectWindow connectWindow = new ConnectWindow(_userClient);
 
-            BDClient.ConnectionStatus.PropertyChanged += (s, p) =>
+            _userClient.ConnectionStatus.PropertyChanged += (s, p) =>
             {
-                if (BDClient.ConnectionStatus.State == Models.App.ConnectionState.Connected && !BDClient.ConnectionStatus.HasError)
+                if (_userClient.ConnectionStatus.State == Models.App.ConnectionState.Connected && !_userClient.ConnectionStatus.HasError)
                 {
                     OnLogin();
                     connectWindow.Close();         
@@ -34,7 +35,7 @@ namespace RailFreightTraffic
 
         private void OnLogin()
         {
-            Views.MainWindow view = new Views.MainWindow();
+            MainWindow view = new MainWindow(_userClient);
             view.Show();
         }
     }
